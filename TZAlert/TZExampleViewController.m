@@ -88,7 +88,7 @@
 {
     NSArray *titles;
     if (section == 0) {
-        titles = @[@"Alert popover", @"Alert slide down", @"Alert slider up", @"Alert with dim background", @"Alert automatically hide after shown"];
+        titles = @[@"Alert popover", @"Alert slide down", @"Alert slider up", @"Alert with dim background", @"Alert with modal", @"Alert automatically hide after shown"];
     } else if (section == 1) {
         titles = @[@"Alert with title and content", @"Alert with only title", @"Alert with custom view"];
     }
@@ -134,7 +134,9 @@
             [self showAlertWithPresentationStyle:indexPath.row];
         } else if (indexPath.row == 3) {
             [self showAlertWithDimBackground];
-        } else {
+        } else if (indexPath.row == 4) {
+            [self showAlertWithModal];
+        } else if (indexPath.row == 5) {
             [self showAlertAndHideAfterDuration:3];
         }
     } else if (indexPath.section == 1) {
@@ -182,6 +184,23 @@
     [self.alert show];
 }
 
+- (void)showAlertWithModal
+{
+    self.alert = [[TZAlert alloc] initWithView:self.view];
+    [self.view addSubview:self.alert];
+    self.alert.presentationStyle = TZAlertPresentationStyleSlideDown;
+    self.alert.titleText = @"Test";
+    self.alert.contentText = @"This is the alert with modal ";
+    self.alert.defaultSize = CGSizeMake(self.view.window.bounds.size.width * 0.5, self.view.window.bounds.size.height * 0.1);
+    self.alert.color = [UIColor colorWithRed:0.24f green:0.35f blue:0.49f alpha:1];
+    self.alert.dimBackground = YES;
+    
+    self.alert.isModal = YES;
+    
+    [self.alert show];
+}
+
+
 - (void)showAlertAndHideAfterDuration:(NSTimeInterval)duration
 {
     self.alert = [[TZAlert alloc] initWithView:self.view];
@@ -214,17 +233,19 @@
     self.alert.presentationStyle = TZAlertPresentationStylePopUp;
     
     UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
-    customView.backgroundColor = [UIColor viewFlipsideBackgroundColor];
+    customView.backgroundColor = [UIColor lightGrayColor];
     
     UILabel *label = [[UILabel alloc] initWithFrame:customView.bounds];
     [customView addSubview:label];
     label.textAlignment = NSTextAlignmentCenter;
     label.text = @"I'm a custom view";
-    label.textColor = [UIColor lightTextColor];
+    label.textColor = [UIColor darkTextColor];
     label.backgroundColor = [UIColor clearColor];
     label.center = CGPointMake(customView.bounds.size.width * 0.5, customView.bounds.size.height * 0.5);
     
     self.alert.customView = customView;
+    
+    self.alert.isModal = YES;
 
     [self.alert showWithAnimated:YES];
 

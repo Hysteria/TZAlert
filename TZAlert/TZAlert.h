@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 typedef enum {
     TZAlertPresentationStylePopUp = 0,
@@ -19,6 +20,9 @@ typedef enum {
 @property (nonatomic, assign) TZAlertPresentationStyle presentationStyle;
 @property (nonatomic, assign) BOOL dimBackground;
 @property (nonatomic, assign) BOOL isModal;
+@property (nonatomic, assign) BOOL tapToHide;
+@property (nonatomic, strong) UIButton *closeButton;
+@property (nonatomic, strong) void(^closeBlock)();
 @property (nonatomic, assign) CGSize defaultSize;
 @property (nonatomic, copy) NSString *titleText;
 @property (nonatomic, copy) NSString *contentText;
@@ -28,6 +32,8 @@ typedef enum {
 @property (nonatomic, strong) UIColor *color;
 @property (nonatomic, assign) CGFloat opacity;
 
+@property (nonatomic, readonly) BOOL isShowing;
+
 - (id)initWithView:(UIView *)view;
 - (id)initWithWindow:(UIWindow *)window;
 
@@ -36,5 +42,6 @@ typedef enum {
 - (void)showAndHideAfterDuration:(NSTimeInterval)duration;
 - (void)hideWithAnimated:(BOOL)animated;
 - (void)hide;
+- (void)hideWithCompletionBlock:(void (^)(void))block;
 
 @end

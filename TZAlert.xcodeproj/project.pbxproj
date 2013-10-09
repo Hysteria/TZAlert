@@ -460,6 +460,7 @@
 				CB6CBA4017EED4FE00BE6CA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CB6CBA4117EED4FE00BE6CA2 /* Build configuration list for PBXNativeTarget "TZAlertTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +469,7 @@
 				CB6CBA4317EED4FE00BE6CA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
