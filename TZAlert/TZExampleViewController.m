@@ -81,7 +81,7 @@
 
 - (NSArray *)titleForSections
 {
-    return @[@"Presentation Style", @"Different content view"];
+    return @[@"Show on current view", @"Show on window"];
 }
 
 - (NSArray *)titleForRowsInSection:(NSUInteger)section
@@ -215,8 +215,9 @@
 
 - (void)showAlertWithTitleText:(NSString *)title withContentText:(NSString *)content
 {
-    self.alert = [[TZAlert alloc] initWithView:self.view];
-    [self.view addSubview:self.alert];
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    self.alert = [[TZAlert alloc] initWithView:window];
+    [window addSubview:self.alert];
     self.alert.presentationStyle = TZAlertPresentationStyleSlideDown;
     self.alert.titleText = title;
     self.alert.contentText = content;
@@ -228,8 +229,9 @@
 
 - (void)showAlertViewCustomView
 {
-    self.alert = [[TZAlert alloc] initWithView:self.view];
-    [self.view addSubview:self.alert];
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    self.alert = [[TZAlert alloc] initWithView:window];
+    [window addSubview:self.alert];
     self.alert.presentationStyle = TZAlertPresentationStylePopUp;
     
     UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
